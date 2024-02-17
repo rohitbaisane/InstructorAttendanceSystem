@@ -18,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
     checkInTime: DataTypes.DATE,
     checkOutTime: DataTypes.DATE,
     isCheckedIn: DataTypes.BOOLEAN,
-    monthId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'InstructorAttendance',
