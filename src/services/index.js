@@ -1,3 +1,3 @@
 module.exports = {
-    instructorService: require('./instructor-service'),
+    InstructorService: require('./instructor-service'),
 }

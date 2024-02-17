@@ -1,13 +1,14 @@
 
-const { instructorService } = require('./services/instructorService');
+const { InstructorService } = require('../services/index');
+const instructorService = new InstructorService();
 
-const checkIn = (req, res) => {
-
+const checkIn = async (req, res) => {
     const employeeCheckInData = {
-        employeeId: req.body.employeeId,
+        instructorId: req.body.instructorId,
         checkInTime: req.body.checkInTime,
-    }
-
+    };
+    const instructorCheckInRecord = await instructorService.checkIn(employeeCheckInData);
+    return res.status(200).json(instructorCheckInRecord);
 }
 
 module.exports = {

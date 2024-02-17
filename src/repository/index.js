@@ -1,3 +1,3 @@
 module.exports = {
-    instructorRepository: require('./insturctor-repository'),
+    InstructorRepository: require('./insturctor-repository'),
 }

@@ -1,11 +1,14 @@
-const { InstructorRepository } = require('./repository/index.js');
+const { InstructorRepository } = require('../repository/index.js');
 
-class instructorService {
+class InstructorService {
 
     constructor() {
         this.instructorRepository = new InstructorRepository();
     }
-    async instructorCheckIn() {
-        await this.instructorRepository.instructorCheckIn();
+    async checkIn(employeeCheckInData) {
+        const instructorCheckInRecord = await this.instructorRepository.checkIn(employeeCheckInData);
+        return instructorCheckInRecord;
     }
 }
+
+module.exports = InstructorService;

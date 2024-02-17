@@ -1,5 +1,12 @@
+const { InstructorAttendance } = require('../models/index');
 
+class InstructorRepository {
 
-class instructorRepository {
-
+    async checkIn(instructorCheckInData) {
+        const instructorCheckInRecord = new InstructorAttendance(instructorCheckInData);
+        await instructorCheckInRecord.save();
+        return instructorCheckInRecord;
+    }
 }
+
+module.exports = InstructorRepository;

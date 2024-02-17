@@ -19,10 +19,8 @@ module.exports = {
         type: Sequelize.DATE
       },
       isCheckedIn: {
-        type: Sequelize.BOOLEAN
-      },
-      monthId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
       },
       createdAt: {
         allowNull: false,
