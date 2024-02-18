@@ -4,7 +4,7 @@
   "description": "This is a take home assignment.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index"
   },
   "author": "Rohit Baisane",
   "license": "ISC",
