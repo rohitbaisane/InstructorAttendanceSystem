@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": "rohitbaisane91@",
-    "database": "instructor_attendance_db",
-    "host": "127.0.0.1",
+    "username": "<USERNAME>",
+    "password": "<PASSWORD>",
+    "database": "<DATABASE_NAME>",
+    "host": "<IP_ADDRESS>",
     "dialect": "mysql"
   },
   "test": {
