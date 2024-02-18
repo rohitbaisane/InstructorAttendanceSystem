@@ -45,7 +45,7 @@
   - For every check in there will be a check out on same day.
 
 
-## Api Documention 
+## Api Documentation 
 - Seeder will add multiple checkin and checkout data.
 
 - GetMontlyReport:
