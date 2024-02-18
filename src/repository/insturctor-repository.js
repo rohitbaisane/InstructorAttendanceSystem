@@ -1,13 +1,11 @@
-const { InstructorAttendance } = require('../models/index');
+const { InstructorAttendance, sequelize, Sequelize } = require('../models/index');
 
 class InstructorRepository {
 
     async getActiveCheckIn(filter) {
-        console.log(filter);
         const existingCheckIn = await InstructorAttendance.findOne({
             where: filter
         });
-        console.log(existingCheckIn);
         return existingCheckIn;
     }
 
@@ -15,9 +13,7 @@ class InstructorRepository {
         const sequelizeFilter = {
             where: filter,
         }
-        console.log(filter);
         const instructorCheckInRecord = await InstructorAttendance.findOne(sequelizeFilter);
-        console.log(instructorCheckInRecord);
         return instructorCheckInRecord;
     }
 
@@ -30,9 +26,14 @@ class InstructorRepository {
         const sequelizeFilter = {
             where: filter,
         };
-        console.log(sequelizeFilter);
         const instructorCheckInData = await InstructorAttendance.update(instructorCheckOutData, sequelizeFilter);
         return instructorCheckInData;
+    }
+
+    async getTotalWorkingHours({ month, year }) {
+        const query = `SELECT SUM(TIMESTAMPDIFF(minute,checkInTime,checkOutTime)) AS TOTAL_WORKING_HOURS,INSTRUCTORID FROM INSTRUCTORATTENDANCES WHERE MONTH(checkInTime)=${month} AND YEAR(checkInTime)=${year} AND isCheckedIn = 0 GROUP BY INSTRUCTORID;`;
+        const totalWorkingHours = await sequelize.query(query, { type: Sequelize.QueryTypes.SELECT });
+        return totalWorkingHours;
     }
 }
 
