@@ -103,11 +103,11 @@ class InstructorService {
         try {
             const monthInfo = new Map([
                 ["january", 1], ["february", 2], ["march", 3], ["april", 4],
-                ["may", 5], ["jun", 6], ["july", 7], ["augest", 8],
+                ["may", 5], ["june", 6], ["july", 7], ["august", 8],
                 ["september", 9], ["october", 10], ["november", 11], ["december", 12],
             ]);
 
-            const monthNumber = monthInfo.get(month);
+            const monthNumber = monthInfo.get(month.toLowerCase());
             console.log(monthNumber);
             if (!monthNumber) throw new Error({ message: "Invalid month in input" });
 
