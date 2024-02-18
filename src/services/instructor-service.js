@@ -16,10 +16,9 @@ class InstructorService {
             });
 
             if (existingCheckIn) {
-                throw new Error({
-                    message: "There is already existing check in for instructor",
-                    statusCode: 400,
-                });
+                const errorObj = new Error("There is already existing check in for instructor");
+                errorObj.statusCode = 400;
+                throw errorObj;
             }
 
             //check for record with overlapping check in and check out time.
@@ -33,21 +32,22 @@ class InstructorService {
                 instructorId: employeeCheckInData.instructorId,
             });
             if (overlappingCheckInRecord) {
-                throw new Error({
-                    message: "There is already existing record with overlapping time",
-                    stautsCode: 400
-                });
+                const errObj = new Error("There is already existing record with overlapping time");
+                errObj.statusCode = 400;
+                throw errObj;
             }
             const instructorCheckInRecord = await this.instructorRepository.checkIn(employeeCheckInData);
             return instructorCheckInRecord;
         } catch (err) {
-            if (err.name == 'SequelizeDatabaseError') {
-                throw new Error({
-                    message: err.sqlMessage,
-                    statusCode: 400
-                })
+            if (err.statusCode && err.statusCode == 400) {
+                throw err;
             }
-            throw new Error({ message: "Interal server error", statuscode: 500 });
+            if (err.name == 'SequelizeDatabaseError') {
+                err.message = err.sqlMessage;
+                err.statusCode = 400;
+                throw err;
+            }
+            throw new Error("Interal server error");
         }
     }
 
@@ -58,12 +58,14 @@ class InstructorService {
             //check for existing active check in.
             const existingCheckIn = await this.instructorRepository.getActiveCheckIn({ instructorId, isCheckedIn: true });
             if (!existingCheckIn) {
-                throw new Error({
-                    message: "There is no check in exist for give instructor"
-                });
+                const errObj = new Error("There is no check in exist for give instructor");
+                errObj.statusCode = 400;
+                throw errObj;
             }
             if (existingCheckIn && existingCheckIn.checkInTime.getTime() >= new Date(checkOutTime).getTime()) {
-                throw new Error({ message: "Check in time can't be greater or equal than check out time" });
+                const errObj = new Error("Check in time can't be greater or equal than check out time");
+                errObj.statusCode = 400;
+                throw errObj;
             }
 
             //check for record with overlapping check in and check out time.
@@ -76,7 +78,9 @@ class InstructorService {
             });
 
             if (overlappingCheckInRecord) {
-                throw new Error({ message: "There is already existing record with overlapping time" });
+                const errObj = new Error("There is already existing record with overlapping time");
+                errObj.statusCode = 400;
+                throw errObj;
             }
 
             const filter = {
@@ -89,13 +93,15 @@ class InstructorService {
             });
             return instructorCheckInRecord;
         } catch (err) {
-            if (err.name == 'SequelizeDatabaseError') {
-                throw new Error({
-                    message: err.sqlMessage,
-                    statusCode: 400
-                })
+            if (err.statusCode && err.statusCode == 400) {
+                throw err;
             }
-            throw new Error({ message: "Interal server error", statuscode: 500 });
+            if (err.name == 'SequelizeDatabaseError') {
+                err.message = err.sqlMessage;
+                err.statusCode = 400;
+                throw err;
+            }
+            throw new Error("Interal server error");
         }
     }
 
@@ -108,20 +114,25 @@ class InstructorService {
             ]);
 
             const monthNumber = monthInfo.get(month.toLowerCase());
-            console.log(monthNumber);
-            if (!monthNumber) throw new Error({ message: "Invalid month in input" });
+            if (!monthNumber) {
+                const errObj = new Error("Invalid month in input");
+                errObj.statusCode = 400;
+                throw errObj;
+            };
 
             const instructorTotalWorkingHourse = await this.instructorRepository.getTotalWorkingHours({ month: monthNumber, year });
             return instructorTotalWorkingHourse;
         }
         catch (err) {
-            if (err.name == 'SequelizeDatabaseError') {
-                throw new Error({
-                    message: err.sqlMessage,
-                    statusCode: 400
-                })
+            if (err.statusCode && err.statusCode == 400) {
+                throw err;
             }
-            throw new Error({ message: "Interal server error", statuscode: 500 });
+            if (err.name == 'SequelizeDatabaseError') {
+                err.message = err.sqlMessage;
+                err.statusCode = 400;
+                throw err;
+            }
+            throw new Error("Interal server error");
         }
     }
 
