@@ -31,7 +31,7 @@ class InstructorRepository {
     }
 
     async getTotalWorkingHours({ month, year }) {
-        const query = `SELECT SUM(TIMESTAMPDIFF(minute,checkInTime,checkOutTime)) AS TOTAL_WORKING_HOURS,INSTRUCTORID FROM INSTRUCTORATTENDANCES WHERE MONTH(checkInTime)=${month} AND YEAR(checkInTime)=${year} AND isCheckedIn = 0 GROUP BY INSTRUCTORID;`;
+        const query = `SELECT SUM(TIMESTAMPDIFF(minute,checkInTime,checkOutTime)) AS TOTAL_WORKING_TIME_MINUTES,INSTRUCTORID FROM InstructorAttendances WHERE MONTH(checkInTime)=${month} AND YEAR(checkInTime)=${year} AND isCheckedIn = 0 GROUP BY INSTRUCTORID;`;
         const totalWorkingHours = await sequelize.query(query, { type: Sequelize.QueryTypes.SELECT });
         return totalWorkingHours;
     }

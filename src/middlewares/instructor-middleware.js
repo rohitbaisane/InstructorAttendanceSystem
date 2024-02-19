@@ -14,6 +14,7 @@ const validateCheckOut = (req, res, next) => {
 
 const validateGetMonthlyReport = (req, res, next) => {
     if (!req.query.month || !req.query.year) {
+        console.log("running");
         return res.status(400).json({ message: "Insufficient input parameters" });
     }
     next();

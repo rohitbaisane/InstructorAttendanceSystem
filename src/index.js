@@ -1,13 +1,11 @@
 const express = require('express');
 const app = express();
+const { PORT } = require('./config/serverConfig');
+
 
 app.use(express.json());
-app.get('/', (req, res) => {
-    console.log('running');
-    return res.send("data running");
-});
 app.use('/api', require('./routes/index'));
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(PORT, () => {
     console.log('Server is listening');
 });

@@ -1,6 +1,7 @@
 # Welcome to Instructor Attendance System
 
 ## Project Setup
+- Use node 16 version
 - clone the project on your local
 - Execute `npm install` from root of the project
 - Create a `.env` file in the root directory and add the following environment variable
@@ -51,7 +52,7 @@
 - GetMontlyReport:
 ```
    GET /api/get-monthly-report
-   
+   Query Parameters:
    {
       "month": String,
       "year": Number,
@@ -64,7 +65,7 @@
 
    {
      "instructorId": Number,
-     "checkInTime": ISODateAndTime,
+     "checkInTime": ISODateAndTimeString,
    }
 ```
 
@@ -74,6 +75,6 @@
 
    {
       "instructorId": Number,
-      "checkOutTime": ISODateAndTime,
+      "checkOutTime": ISODateAndTimeString,
    }
 ```

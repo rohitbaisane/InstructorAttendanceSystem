@@ -112,7 +112,7 @@ class InstructorService {
                 ["may", 5], ["june", 6], ["july", 7], ["august", 8],
                 ["september", 9], ["october", 10], ["november", 11], ["december", 12],
             ]);
-
+            console.log("running");
             const monthNumber = monthInfo.get(month.toLowerCase());
             if (!monthNumber) {
                 const errObj = new Error("Invalid month in input");
@@ -127,6 +127,7 @@ class InstructorService {
             if (err.statusCode && err.statusCode == 400) {
                 throw err;
             }
+            console.log(err);
             if (err.name == 'SequelizeDatabaseError') {
                 err.message = err.sqlMessage;
                 err.statusCode = 400;

@@ -36,6 +36,7 @@ const getMonthlyReport = async (req, res) => {
             month: req.query.month,
             year: req.query.year,
         });
+        console.log("running");
         return res.status(200).json(instructorWorkingHoursRecords);
     }
     catch (err) {
