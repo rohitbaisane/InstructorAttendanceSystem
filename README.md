@@ -25,7 +25,7 @@
 `npx sequelize db:migrate`
 `npx sequelize db:seed:all`
 
-- Once you've executed all the above commands execute `npm install` to run the project.
+- Once you've executed all the above commands execute `npm start` to run the project.
 
 ```
 
